@@ -41,7 +41,7 @@ module.exports = (env) => {
         },
         entry: {
             main: ['./ReactApp/index.tsx'],
-            vendor: ['react', 'react-dom', 'history', 'react-redux', 'react-router', 'react-router-dom', 'react-router-redux', 'redux', 'redux-actions', 'redux-thunk' ]
+            vendor: ['react', 'react-dom'x ]
         },
         output: {
             path: path.join(__dirname, 'wwwroot', 'dist'),

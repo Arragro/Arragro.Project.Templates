@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Arragro.Dotnet.TS.React.Project.Template</id>
+    <version>1.0.0</version>
+    <description>
+      Creates Arragro Dotnet Core AspNet Typescript React Webpack project.
+    </description>
+    <authors>Michael Jewell</authors>
+    <owners>Michael Jewell</owners>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/Arragro/Arragro.Project.Templates</projectUrl>
+    <iconUrl>http://cdn.arragro.com/public/images/arragro-icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright 2018 (c) Arragro Ltd</copyright>
+    <tags>cms mvc aspnetcore netstandard Typescript React Webpack</tags>
+  </metadata>
+  <files>
+    <file src=".template.config\template.json" target="content\.template.config\template.json" />
+    <file src="Controllers\HomeController.cs" target="content\Controllers\HomeController.cs" />
+    <file src="Properties\launchSettings.json" target="content\Properties\launchSettings.json" />
+    <file src="ReactApp\App.tsx" target="content\ReactApp\App.tsx" />
+    <file src="ReactApp\index.tsx" target="content\ReactApp\index.tsx" />
+    <file src="ReactApp\scss\site.scss" target="content\ReactApp\scss\site.scss" />
+    <file src="ReactApp\Containers\AnotherButtonClicker.tsx" target="content\ReactApp\Containers\AnotherButtonClicker.tsx" />
+    <file src="ReactApp\Containers\HomePage.tsx" target="content\ReactApp\Containers\HomePage.tsx" />
+    <file src="ReactApp\Components\ButtonClicker.tsx" target="content\ReactApp\Components\ButtonClicker.tsx" />
+    <file src="Views\Home\Index.cshtml" target="content\Views\Home\Index.cshtml" />
+    <file src=".babelrc" target="content\.babelrc" />
+    <file src="dotnet.ts.react.csproj" target="content\dotnet.ts.react.csproj" />
+    <file src="package-lock.json" target="content\package-lock.json" />
+    <file src="package.json" target="content\package.json" />
+    <file src="postcss.config.js" target="content\postcss.config.js" />
+    <file src="Program.cs" target="content\Program.cs" />
+    <file src="Startup.cs" target="content\Startup.cs" />
+    <file src="tsconfig.json" target="content\tsconfig.json" />
+    <file src="webpack.config.js" target="content\webpack.config.js" />
+  </files>
+</package>

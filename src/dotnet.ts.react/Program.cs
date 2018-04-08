@@ -6,7 +6,7 @@ using System;
 using System.Globalization;
 using System.IO;
 
-namespace ArragroCMS.Management
+namespace dotnet.ts.react
 {
     public class Program
     {

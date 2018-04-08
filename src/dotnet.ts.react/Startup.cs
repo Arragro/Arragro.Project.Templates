@@ -16,7 +16,7 @@ using System;
 using System.Globalization;
 using System.IO.Compression;
 
-namespace ArragroCMS.Management
+namespace dotnet.ts.react
 {
     public class Startup
     {

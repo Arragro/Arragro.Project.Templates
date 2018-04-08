@@ -1,0 +1,12 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Michael Jewell",
+    "classifications": [ "Web", "MVC", "React", "Typescript", "Webpack" ],
+    "identity": "Arragro.Dotnet.TS.React.Project.Template",
+    "name": "ASP.NET Core with Typescript, React and Webpack",
+    "tags": {
+      "language": "C#"
+    },
+    "shortName": "dotnettsreact",
+    "sourceName": "dotnet.ts.react"
+  }

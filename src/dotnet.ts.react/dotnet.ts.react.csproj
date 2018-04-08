@@ -7,7 +7,7 @@
     <OutputType>Exe</OutputType>
     <PackageId>dotnet.ts.react</PackageId>
     <MvcRazorCompileOnPublish>true</MvcRazorCompileOnPublish>
-    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>    
   </PropertyGroup>
   
   <ItemGroup>

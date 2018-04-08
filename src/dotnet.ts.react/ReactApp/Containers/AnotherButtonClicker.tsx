@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-import ButtonClicker from '../Components/ButtonClicker'
+import ButtonClicker from '../components/ButtonClicker'
 
 export default class AnotherButtonClicker extends React.Component<any, any> {
     constructor (props: any) {

@@ -40,8 +40,8 @@ module.exports = (env) => {
             ]
         },
         entry: {
-            main: ['./ReactApp/index.tsx'],
-            vendor: ['react', 'react-dom'x ]
+            main: ['react-hot-loader/patch', './ReactApp/index.tsx'],
+            vendor: ['react', 'react-dom']
         },
         output: {
             path: path.join(__dirname, 'wwwroot', 'dist'),

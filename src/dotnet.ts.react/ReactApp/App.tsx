@@ -3,8 +3,8 @@ import './scss/site.scss'
 import * as React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import HomePage from './Containers/HomePage'
-import AnotherButtonClicker from './Containers/AnotherButtonClicker'
+import HomePage from './containers/HomePage'
+import AnotherButtonClicker from './containers/AnotherButtonClicker'
 
 const test = () => <h3>Test!!!</h3>
 

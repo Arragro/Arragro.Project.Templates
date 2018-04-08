@@ -10,7 +10,7 @@ const test = () => <h3>Test!!!</h3>
 
 export default class App extends React.Component {
     constructor (props: any) {
-        super (props)
+        super(props)
     }
 
     public render () {

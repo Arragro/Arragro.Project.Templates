@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 import ButtonClicker from '../Components/ButtonClicker'
 
-export default class AnotherButtonClicker extends React.Component<any, any> {    
+export default class AnotherButtonClicker extends React.Component<any, any> {
     constructor (props: any) {
-        super (props)
+        super(props)
 
         this.state = {
             startNumber: this.parseStartNumber()
@@ -19,25 +19,26 @@ export default class AnotherButtonClicker extends React.Component<any, any> {
 
         if (this.props.match.params.startNumber !== undefined) {
             currentStartNumber = parseInt(this.props.match.params.startNumber, 10)
-            if (currentStartNumber === NaN) {
+            if (isNaN(currentStartNumber)) {
                 currentStartNumber = 10
             }
         }
 
         if (nextProps !== null && nextProps.match.params.startNumber !== undefined) {
             newStartNumber = parseInt(nextProps.match.params.startNumber, 10)
-            if (newStartNumber === NaN) {
+            if (isNaN(newStartNumber)) {
                 newStartNumber = 10
             }
+        } else {
+            newStartNumber = 10
+        }
 
-            if (currentStartNumber !== newStartNumber) {
-                return newStartNumber
-            }
+        if (nextProps !== null && currentStartNumber !== newStartNumber) {
+            return newStartNumber
         }
 
         return currentStartNumber
     }
-
 
     componentWillReceiveProps (nextProps: any) {
         this.setState({

@@ -5,7 +5,7 @@ import ButtonClicker from '../Components/ButtonClicker'
 
 export default class HomePage extends React.Component<any, any> {
     constructor (props: any) {
-        super (props)
+        super(props)
     }
 
     public render () {

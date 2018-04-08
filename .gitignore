@@ -259,3 +259,4 @@ temp/Arragro.ObjectLogging.Mvc
 **/App_Data/Logs/*
 src/ArragroCMS.Management/dist
 /hide.ps1
+**/dist/*

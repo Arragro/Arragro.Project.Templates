@@ -13,7 +13,6 @@ export default class AnotherButtonClicker extends React.Component<any, any> {
     }
 
     parseStartNumber (nextProps: any = null): number {
-        debugger
         let currentStartNumber: number = 10
         let newStartNumber: number = 10
 

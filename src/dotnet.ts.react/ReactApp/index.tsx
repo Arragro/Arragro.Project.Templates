@@ -8,26 +8,23 @@ import App from './app'
 
 const rootEl = document.getElementById('react-app')
 
-ReactDOM.render(
-    <AppContainer>
-        <App />
-    </AppContainer>,
-    rootEl
-)
+const render = (Component: any) => {
+    ReactDOM.render(
+        <AppContainer>
+            <Component />
+        </AppContainer>,
+        rootEl
+    )
+}
+
+render(App)
 
 // Hot Module Replacement API
 declare let module: { hot: any }
 
 if (module.hot) {
-    module.hot.accept('./App', () => {
-        const NewApp = require('./App').default
-        console.log(NewApp)
-
-        ReactDOM.render(
-            <AppContainer>
-                <App />
-            </AppContainer>,
-            rootEl
-        )
-    })
+  module.hot.accept('./app', () => {
+      //const NewApp = require<{default: typeof App}>('./app').default
+      render(App)
+  })
 }

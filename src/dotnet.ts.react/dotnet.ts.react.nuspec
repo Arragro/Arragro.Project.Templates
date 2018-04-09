@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Arragro.Dotnet.TS.React.Project.Template</id>
-    <version>0.0.6-alpha</version>
+    <version>0.0.11-alpha</version>
     <description>
       Creates Arragro Dotnet Core AspNet Typescript React Webpack project.
     </description>

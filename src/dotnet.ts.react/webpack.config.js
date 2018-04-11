@@ -76,7 +76,6 @@ module.exports = (env) => {
                     new webpack.optimize.AggressiveMergingPlugin(),
                     new CompressionPlugin({
                         asset: "[path].gz[query]",
-                        //include: /\/wwwroot/,
                         algorithm: "gzip",
                         test: /\.js$|\.css$|\.svg$/,
                         threshold: 10240,

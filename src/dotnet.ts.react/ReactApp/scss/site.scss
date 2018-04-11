@@ -22,13 +22,21 @@ body {
 #react-app {
     height: 100%;
 
-    > div, 
-    > div .row {
+    > div,
+    > div > .container > .row {
         height: 100%;
     }
 
+    > div > .container-fluid { 
+        height: calc(100% - 61px);
+        overflow: auto;
+    }
+
     .app-container {
+        margin: 0 auto;
         margin-top: 2em;
+        width: 100%;
+        padding: 0 2em;
     }
 }
 

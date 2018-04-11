@@ -20,9 +20,11 @@ export default class Layout extends React.Component<ILayoutProps, any> {
             <div>
                 <Alert stack={{ limit: 10 }} position='bottom-right' effect='bouncyflip' timeout={3000} />
                 <NavBar />
-                <div className='row'>
-                    <div className='app-container container'>
-                        {children}
+                <div className='container-fluid'>
+                    <div className='row'>
+                        <div className='app-container'>
+                            {children}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.css'
+import 'react-s-alert/dist/s-alert-default.css'
+import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css'
 import './scss/site.scss'
 
 import * as React from 'react'
@@ -23,8 +26,7 @@ render(App)
 declare let module: { hot: any }
 
 if (module.hot) {
-  module.hot.accept('./app', () => {
-      //const NewApp = require<{default: typeof App}>('./app').default
-      render(App)
-  })
+    module.hot.accept('./app', () => {
+        render(App)
+    })
 }

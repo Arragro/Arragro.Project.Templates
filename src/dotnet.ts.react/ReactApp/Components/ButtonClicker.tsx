@@ -20,32 +20,26 @@ export default class ButtonClicker extends React.Component<IButtonClickerProps, 
 
     public componentWillReceiveProps (nextProps: IButtonClickerProps) {
         if (this.props.startNumber !== nextProps.startNumber) {
-            this.setState({
-                ...this.state,
+            this.setState(state => ({
+                ...state,
                 counter: nextProps.startNumber === undefined ? 0 : nextProps.startNumber
-            })
+            }))
         }
     }
 
     public render () {
         return <div>
                 <h3>Hello, {this.state.counter}</h3>
-                <button onClick={this.buttonClick.bind(this)}>Click Me!</button>
-                <br />
-                <button onClick={this.redirect.bind(this)}>Test!!!</button>
+                <button className='btn btn-primary' onClick={this.buttonClick.bind(this)}>Click Me!</button>
             </div>
     }
 
     private buttonClick () {
         this.setState(state => ({
             ...state,
-            counter: this.state.counter + 1
+            counter: state.counter + 1
         }), () => {
             console.log(this.state.counter)
         })
-    }
-
-    private redirect () {
-        this.props.history.push('/test')
     }
 }

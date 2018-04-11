@@ -1,0 +1,14 @@
+$blue: #4B7DC2;
+$gray: #757575;
+$lightGray: lighten($gray, 30%);
+$lighterGray: lighten($gray, 50%);
+$headerFontFamily: Muli;
+
+@mixin transform-nav() {
+    transition: transform .3s, color 1s, fill 1s;
+}
+
+@mixin transform-nav-grow($scale) {
+    transform: scale($scale);
+    /*transform: translateY(-8px) scale(1.05);*/
+}

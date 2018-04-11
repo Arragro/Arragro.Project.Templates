@@ -13,9 +13,9 @@
       "strict": true,
       "outDir": "build",
       "lib": ["es6", "es7", "dom"],
-      "baseUrl": "src",
+      "baseUrl": "ReactApp",
       "paths": {
-        "app/*": ["./ReactApp/*"]
+        "app/*": ["./*"]
       }
     },
     "exclude": ["dist", "build", "node_modules"]

@@ -2,16 +2,20 @@ const path = require('path');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CompressionPlugin = require("compression-webpack-plugin")
+const CompressionPlugin = require("compression-webpack-plugin");
+const TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
 
 module.exports = (env) => {
 
-    const isDevBuild = !(env && env.prod);
+    const isDevBuild = !(env && env === 'prod');
 
     let config = {
         devtool: 'source-map',
         resolve: {
-            extensions: ['.js', '.jsx', '.ts', '.tsx']
+            extensions: ['.js', '.jsx', '.ts', '.tsx'],
+            plugins: [
+                new TsConfigPathsPlugin(/* { tsconfig, compiler } */)
+            ]
         },
         module: {
             loaders: [
@@ -34,6 +38,15 @@ module.exports = (env) => {
                         'css-hot-loader'                        
                     ].concat(ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'postcss-loader', 'sass-loader']}))
                 },
+                {
+                  test: /\.css$/,
+                  use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                      { loader: 'css-loader' }
+                    ]
+                  })
+                },
                 { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
                 { test: /\.woff(\?\S*)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
                 { test: /\.(ttf|eot|svg)(\?\S*)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader' }
@@ -49,26 +62,26 @@ module.exports = (env) => {
             publicPath: '/dist/'
         },
         plugins: [
+            new ExtractTextPlugin('main.css'),
+            require('autoprefixer'),
             new webpack.optimize.OccurrenceOrderPlugin(),
         ].concat(
             isDevBuild ? [
-                new ExtractTextPlugin('main.css'),
-                new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.js' })
             ] : [
-                    new ExtractTextPlugin('main.css'),
-                    new UglifyJSPlugin(),
-                    new webpack.LoaderOptionsPlugin({
-                        minimize: true,
-                        debug: false
-                    }),
                     new webpack.DefinePlugin({
                         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
                     }),
-                    require('autoprefixer'),
                     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.js' }),
+                    new webpack.optimize.UglifyJsPlugin(),
+                    new webpack.optimize.AggressiveMergingPlugin(),
                     new CompressionPlugin({
-                        test: /\.(js|css)/
-                    })
+                        asset: "[path].gz[query]",
+                        //include: /\/wwwroot/,
+                        algorithm: "gzip",
+                        test: /\.js$|\.css$|\.svg$/,
+                        threshold: 10240,
+                        minRatio: 0.8
+                    }),
                 ])
     }
 

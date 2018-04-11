@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
 
 import ButtonClicker from '../components/ButtonClicker'
 
@@ -49,10 +48,6 @@ export default class AnotherButtonClicker extends React.Component<any, any> {
     public render () {
         return <div>
             <ButtonClicker startNumber={this.state.startNumber} history={this.props.history} />
-            <br />
-            <Link to='/another-button-clicker/50'>Another 50</Link>
-            <br />
-            <Link to='/'>Home</Link>
         </div>
     }
 }

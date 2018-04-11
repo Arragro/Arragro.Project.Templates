@@ -83,8 +83,8 @@ namespace dotnet.ts.react
             }
 
             app.UseDefaultFiles();
-            app.UseStaticFiles();
-            
+            app.UseCompressedStaticFiles();
+            app.UseStaticFiles();            
             app.UseResponseCompression();
 
             app.UseMvc(routes =>

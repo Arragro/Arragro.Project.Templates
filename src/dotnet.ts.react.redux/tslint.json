@@ -1,0 +1,16 @@
+{
+  "extends": "tslint-config-standard",
+  "rules": {
+    "ter-indent": [ true, 4 ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-type",
+      "check-typecast"
+    ],
+    "no-irregular-whitespace":  false
+  }
+}

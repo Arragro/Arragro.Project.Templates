@@ -1,5 +1,5 @@
 import { TodoActions } from './actions'
-import { todoReducer } from './reducers'
+import { todoReducer } from './reducer'
 
 export {
     TodoActions,

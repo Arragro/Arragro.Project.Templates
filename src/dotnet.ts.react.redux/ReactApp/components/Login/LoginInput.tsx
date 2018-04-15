@@ -8,6 +8,37 @@ class LoginInput extends React.Component<any, any> {
         this.changeValue = this.changeValue.bind(this)
     }
 
+    render () {
+
+        // Set a specific className based on the validation
+        // state of this component. showRequired() is true
+        // when the value is empty and the required prop is
+        // passed to the input. showError() is true when the
+        // value typed is invalid
+        const className = 'form-group ' + (this.props.className || ' ') +
+            (this.props.showRequired() && this.props.isFormSubmitted() ? ' required' : this.props.showError() ? ' has-error' : '')
+
+        return (
+            <div className={className}>
+                <div className='input-group input-group-lg' data-toggle='tooltip' data-placement='left' title={this.props.title}>
+                    <div className='input-group-prepend'><i className='input-group-text'>@</i></div>
+
+                    <input
+                        className='form-control'
+                        placeholder={this.props.label}
+                        type={this.props.type || 'text'}
+                        name={this.props.name}
+                        onChange={this.changeValue}
+                        value={this.props.getValue()}
+                        checked={this.props.type === 'checkbox' && this.props.getValue() ? true : false}
+                    />
+                </div>
+                {this.getRequiredError(this.props.label)}
+                {this.getValidationError()}
+            </div>
+        )
+    }
+
     // setValue() will set the value of the component, which in
     // turn will validate it and the rest of the form
     private changeValue (event: any) {
@@ -29,38 +60,6 @@ class LoginInput extends React.Component<any, any> {
             return <div className='error-summary'><span className='has-error'>{`The ${label} is required.`}</span></div>
         }
         return null
-    }
-
-    render () {
-
-        // Set a specific className based on the validation
-        // state of this component. showRequired() is true
-        // when the value is empty and the required prop is
-        // passed to the input. showError() is true when the
-        // value typed is invalid
-        const className = 'form-group ' + (this.props.className || ' ') +
-            (this.props.showRequired() && this.props.isFormSubmitted() ? ' required' : this.props.showError() ? ' has-error' : '')
-
-
-        return (
-            <div className={className}>
-                <div className='input-group input-group-lg' data-toggle='tooltip' data-placement='left' title={this.props.title}>
-                    <div className='input-group-prepend'><i className={`input-group-text fa ${this.props.icon}`}></i></div>
-                     
-                    <input
-                        className='form-control'
-                        placeholder={this.props.label}
-                        type={this.props.type || 'text'}
-                        name={this.props.name}
-                        onChange={this.changeValue}
-                        value={this.props.getValue()}
-                        checked={this.props.type === 'checkbox' && this.props.getValue() ? true : false}
-                    />
-                </div>
-                {this.getRequiredError(this.props.label)}
-                {this.getValidationError()}
-            </div>
-            )
     }
 }
 

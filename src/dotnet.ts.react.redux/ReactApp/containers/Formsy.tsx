@@ -1,12 +1,15 @@
 import * as React from 'react'
 import * as FRC from 'formsy-react-components'
 
+import LoginInput from 'app/components/Login/LoginInput'
+
 const { Form, Input, Checkbox } = FRC
 
 export interface IFormsyProps {
 }
 
 export interface IFormsyState {
+    userName: string
     emailAddress: string
     truthy: boolean
     isValid: boolean
@@ -17,6 +20,7 @@ export default class Formsy extends React.Component<IFormsyProps, IFormsyState> 
         super(props)
 
         this.state = {
+            userName: '',
             emailAddress: '',
             truthy: true,
             isValid: true
@@ -24,6 +28,7 @@ export default class Formsy extends React.Component<IFormsyProps, IFormsyState> 
 
         this.setValid = this.setValid.bind(this)
         this.setInvalid = this.setInvalid.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
     }
 
     setValid () {
@@ -43,7 +48,9 @@ export default class Formsy extends React.Component<IFormsyProps, IFormsyState> 
     }
 
     onSubmit (model: any) {
-        alert(JSON.stringify(model))
+        if (this.state.isValid) {
+            alert(JSON.stringify(model))
+        }
     }
 
     render () {
@@ -51,7 +58,7 @@ export default class Formsy extends React.Component<IFormsyProps, IFormsyState> 
             <div>
                 <Form
                     layout='vertical'
-                    validateOnSubmit={false}
+                    validateOnSubmit={true}
                     onInvalid={this.setInvalid}
                     onValid={this.setValid}
                     onChange={this.onChange}
@@ -60,6 +67,13 @@ export default class Formsy extends React.Component<IFormsyProps, IFormsyState> 
 
                     <div className='row'>
                         <div className='col-6'>
+
+                            <LoginInput
+                                label='User Name'
+                                name='userName'
+                                value={this.state.userName}
+                                required
+                            />
 
                             <Input
                                 type='text'

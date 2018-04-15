@@ -30,6 +30,14 @@ body {
     > div > .container-fluid { 
         height: calc(100% - 61px);
         overflow: auto;
+
+        @media (min-width: 1024px)  {
+            height: calc(100% - 72px);
+        }
+
+        @media (min-width: 1124px)  {
+            height: calc(100% - 82px);
+        }
     }
 
     .app-container {

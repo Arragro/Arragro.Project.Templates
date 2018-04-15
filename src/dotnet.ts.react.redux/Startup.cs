@@ -16,7 +16,7 @@ using System;
 using System.Globalization;
 using System.IO.Compression;
 
-namespace dotnet.ts.react
+namespace dotnet.ts.react.redux
 {
     public class Startup
     {

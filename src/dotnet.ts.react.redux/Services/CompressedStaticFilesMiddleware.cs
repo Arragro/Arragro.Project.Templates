@@ -11,7 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace dotnet.ts.react.Services
+namespace dotnet.ts.react.redux.Services
 {
     public class CompressedStaticFilesMiddleware
     {
@@ -120,7 +120,7 @@ namespace dotnet.ts.react.Services
 
 namespace Microsoft.AspNetCore.Builder
 {
-    using dotnet.ts.react.Services;
+    using dotnet.ts.react.redux.Services;
     public static class ResponseCompressionBuilderExtensions
     {
         public static IApplicationBuilder UseCompressedStaticFiles(this IApplicationBuilder builder)

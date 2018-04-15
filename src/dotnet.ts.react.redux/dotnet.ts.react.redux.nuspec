@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-    <id>Arragro.Dotnet.TS.React.Project.Template</id>
-    <version>0.0.12-alpha</version>
+    <id>Arragro.Dotnet.TS.React.Redux.Project.Template</id>
+    <version>0.0.1-alpha</version>
     <description>
-      Creates Arragro Dotnet Core AspNet Typescript React Webpack project.
+      Creates Arragro Dotnet Core AspNet Typescript React Redux Webpack project.
     </description>
     <authors>Michael Jewell</authors>
     <owners>Michael Jewell</owners>
@@ -16,24 +16,25 @@
     <iconUrl>http://cdn.arragro.com/public/images/arragro-icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright>Copyright 2018 (c) Arragro Ltd</copyright>
-    <tags>cms mvc aspnetcore netstandard Typescript React Webpack</tags>
+    <tags>cms mvc aspnetcore netstandard Typescript React Redux Webpack</tags>
   </metadata>
   <files>
     <file src=".template.config\template.json" target="content\.template.config\template.json" />
-    <file src="Controllers\*" target="content\Controllers\" />
+    <file src="Controllers\HomeController.cs" target="content\Controllers\HomeController.cs" />
     <file src="Properties\launchSettings.json" target="content\Properties\launchSettings.json" />
     
     <file src="ReactApp\**\*" target="content\ReactApp\" />
+
     <file src="types\*" target="content\types\" />
-    
+
     <file src="Services\*" target="content\Services\" />
 
     <file src="Views\**\*" target="content\Views\" />
 
     <file src="wwwroot\images\**\*" target="content\wwwroot\images\" />
-
+    
     <file src=".babelrc" target="content\.babelrc" />
-    <file src="dotnet.ts.react.csproj" target="content\dotnet.ts.react.csproj" />
+    <file src="dotnet.ts.react.redux.csproj" target="content\dotnet.ts.react.redux.csproj" />
     <file src="package-lock.json" target="content\package-lock.json" />
     <file src="package.json" target="content\package.json" />
     <file src="postcss.config.js" target="content\postcss.config.js" />

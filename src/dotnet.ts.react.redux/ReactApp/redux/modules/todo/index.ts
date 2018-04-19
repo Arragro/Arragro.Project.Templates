@@ -1,7 +1,9 @@
 import { TodoActions } from './actions'
-import { todoReducer } from './reducer'
+import { TodoReducer } from './reducer'
+import { TodoService } from './service'
 
 export {
     TodoActions,
-    todoReducer
+    TodoReducer,
+    TodoService
 }

@@ -15,16 +15,16 @@ export namespace TodoActions {
         CLEAR_COMPLETED_SUCCESS = 'CLEAR_COMPLETED_SUCCESS'
     }
 
+    export const getAll = createAction(Type.GET_ALL_TODOS_START)
+    export const getAllSuccess = createAction(Type.GET_ALL_TODOS_SUCCESS, (todos: Array<TodoModel>) => todos)
     export const addTodo = createAction<PartialPick<TodoModel, 'text'>>(Type.ADD_TODO)
     export const editTodo = createAction<Partial<TodoModel>>(Type.EDIT_TODO)
     export const deleteTodo = createAction<TodoModel['id']>(Type.DELETE_TODO)
     export const completeTodo = createAction<TodoModel['id']>(Type.COMPLETE_TODO)
     export const completeAll = createAction(Type.COMPLETE_ALL)
-    export const clearCompleted = createAction(Type.CLEAR_COMPLETED_START)
+    export const clearCompleted = createAction(Type.CLEAR_COMPLETED_SUCCESS)
     export const clearCompletedSuccess = createAction(Type.CLEAR_COMPLETED_SUCCESS)
 
-    // export const getAll = createAction(Type.GET_ALL_TODOS_START)
-    // export const getAllSuccess = createAction(Type.GET_ALL_TODOS_SUCCESS, (todos: Array<TodoModel>) => todos)
     // export const addTodo = createAction(Type.ADD_TODO, (todo: TodoModel) => todo)
     // export const editTodo = createAction(Type.EDIT_TODO, (todo: TodoModel) => todo)
     // export const deleteTodo = createAction(Type.DELETE_TODO, (todo: TodoModel) => todo)

@@ -2,11 +2,11 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import { RouteComponentProps } from 'react-router'
-import { TodoActions } from 'redux/modules/todo'
-import { RootState } from 'redux/reducers'
-import { TodoModel } from 'app/models'
-import { omit } from 'app/utils'
-import { Header, TodoList, Footer } from 'app/components'
+import { TodoActions, TodoService } from '@redux/modules/todo'
+import { RootState } from '@redux/reducers'
+import { TodoModel } from '@models/index'
+import { omit } from '@utils/index'
+import { Header, TodoList, Footer } from '@components/index'
 
 const FILTER_VALUES = (Object.keys(TodoModel.Filter) as (keyof typeof TodoModel.Filter)[]).map(
   (key) => TodoModel.Filter[key]
@@ -20,9 +20,10 @@ const FILTER_FUNCTIONS: Record<TodoModel.Filter, (todo: TodoModel) => boolean> =
 
 export namespace Todos {
     export interface Props extends RouteComponentProps<void> {
-        todos: RootState.TodoState
+        todoState: RootState.TodoState
         actions: TodoActions
         filter: TodoModel.Filter
+        service: TodoService.TodoServiceConnectedDispatch
     }
 }
 
@@ -37,8 +38,12 @@ export class Todos extends React.Component<Todos.Props> {
         this.handleFilterChange = this.handleFilterChange.bind(this)
     }
 
+    componentWillMount () {
+        this.props.service.getAll()
+    }
+
     handleClearCompleted (): void {
-        const hasCompletedTodo = this.props.todos.some((todo) => todo.completed || false)
+        const hasCompletedTodo = this.props.todoState.todoModels.some((todo) => todo.completed || false)
         if (hasCompletedTodo) {
             this.props.actions.clearCompleted()
         }
@@ -49,7 +54,8 @@ export class Todos extends React.Component<Todos.Props> {
     }
 
     render () {
-        const { todos, actions, filter } = this.props
+        const { todoState, actions, filter } = this.props
+        const todos = todoState.todoModels
         const activeCount = todos.length - todos.filter((todo) => todo.completed).length
         const filteredTodos = filter ? todos.filter(FILTER_FUNCTIONS[filter]) : todos
         const completedCount = todos.reduce((count, todo) => (todo.completed ? count + 1 : count), 0)
@@ -72,14 +78,16 @@ export class Todos extends React.Component<Todos.Props> {
     }
 }
 
-const mapStateToProps = (state: RootState): Pick<Todos.Props, 'todos' | 'filter'> => {
+const mapStateToProps = (state: RootState): Pick<Todos.Props, 'todoState' | 'filter'> => {
     const hash = state.router.location && state.router.location.hash.replace('#', '')
     const filter = FILTER_VALUES.find((value) => value === hash) || TodoModel.Filter.SHOW_ALL
-    return { todos: state.todos, filter }
+    const props = { todoState: state.todoState, filter }
+    return props
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<RootState>): Pick<Todos.Props, 'actions'> => ({
-    actions: bindActionCreators(omit(TodoActions, 'Type'), dispatch)
+const mapDispatchToProps = (dispatch: Dispatch<RootState>): Pick<Todos.Props, 'actions' | 'service'> => ({
+    actions: bindActionCreators(omit(TodoActions, 'Type'), dispatch),
+    service: TodoService.dispatchServices(dispatch)
 })
 
 const connectedTodos = connect(mapStateToProps, mapDispatchToProps)(Todos)

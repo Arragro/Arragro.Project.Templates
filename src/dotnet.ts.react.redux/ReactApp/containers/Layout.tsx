@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import Alert from 'app/Components/Alert'
-import NavBar from 'app/Components/NavBar'
+import Alert from '@components/Alert'
+import NavBar from '@components/NavBar'
 
 export interface ILayoutProps {
     children: any

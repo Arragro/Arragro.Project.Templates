@@ -15,10 +15,11 @@
       "lib": ["es6", "es7", "dom"],
       "baseUrl": "ReactApp",
       "paths": {
-        "app/*": ["./*"],
-        "redux/*": ["./redux/*"],
-        "models/*": ["./models/*"],
-        "utils/*": ["./utils/*"]
+        "@app/*": ["./*"],
+        "@components/*": ["./components/*"],
+        "@models/*": ["./models/*"],
+        "@redux/*": ["./redux/*"],
+        "@utils/*": ["./utils/*"]
       }
     },
     "exclude": ["dist", "build", "node_modules"]

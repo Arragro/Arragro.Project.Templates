@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as FRC from 'formsy-react-components'
 
-import LoginInput from 'app/components/Login/LoginInput'
+import LoginInput from '@components/Login/LoginInput'
 
 const { Form, Input, Checkbox } = FRC
 

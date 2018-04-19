@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as classNames from 'classnames'
-import { TodoModel } from 'app/models'
-import { TodoActions } from 'redux/modules/todo'
+import { TodoModel } from '@models/index'
+import { TodoActions } from '@redux/modules/todo'
 import { TodoTextInput } from './TodoTextInput'
 
 export namespace TodoItem {

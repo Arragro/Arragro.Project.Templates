@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { TodoActions } from 'redux/modules/todo'
+import { TodoActions } from '@redux/modules/todo'
 import { TodoItem } from './TodoItem'
-import { TodoModel } from 'app/models/TodoModel'
+import { TodoModel } from '@models/index'
 
 export namespace TodoList {
     export interface Props {

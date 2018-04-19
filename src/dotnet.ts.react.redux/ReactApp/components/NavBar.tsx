@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { Nav, NavItem, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 
-import AppSettings from 'app/appSettings'
+import AppSettings from '@app/appSettings'
 
 export interface INavBarProps {
 }

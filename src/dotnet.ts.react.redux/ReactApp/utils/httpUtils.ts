@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux'
 import * as Cookies from 'js-cookie'
 import AppSettings from '../appSettings'
-import { IFetchResult } from 'models/index'
+import { IFetchResult } from '@models/index'
 
 class HttpUtils {
     parseJSON<T> (response: Response): Promise<IFetchResult<T>> {

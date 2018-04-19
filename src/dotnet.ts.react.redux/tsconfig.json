@@ -16,7 +16,9 @@
       "baseUrl": "ReactApp",
       "paths": {
         "app/*": ["./*"],
-        "redux/*": ["./redux/*"]
+        "redux/*": ["./redux/*"],
+        "models/*": ["./models/*"],
+        "utils/*": ["./utils/*"]
       }
     },
     "exclude": ["dist", "build", "node_modules"]

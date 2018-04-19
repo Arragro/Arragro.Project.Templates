@@ -3,11 +3,11 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { routerMiddleware } from 'react-router-redux'
 import { History } from 'history'
-import { loggerMiddleware } from 'redux/middleware'
+import { loggerMiddleware, todoApiMiddleware } from 'redux/middleware'
 import { RootState, rootReducer } from 'redux/reducers'
 
 export function configureStore (history: History, logging: boolean = false, initialState?: RootState): Store<RootState> {
-    let middleware = applyMiddleware(thunk, loggerMiddleware(logging), routerMiddleware(history))
+    let middleware = applyMiddleware(thunk, todoApiMiddleware(), loggerMiddleware(logging), routerMiddleware(history))
 
     if (process.env.NODE_ENV !== 'production') {
         middleware = composeWithDevTools(middleware)

@@ -57,7 +57,7 @@ namespace dotnet.ts.react.redux.Controllers
             if (_todos.ContainsKey(id))
             {
                  if (_todos.TryUpdate(id, todoModel, _todos[id]))
-                    return Ok();
+                    return Json(todoModel);
             }
             return BadRequest();
         }
@@ -72,6 +72,46 @@ namespace dotnet.ts.react.redux.Controllers
                 return Json(todoModel);
             }
             return BadRequest();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            TodoModel output;
+            if (_todos.TryRemove(id, out output))
+                return Json(output);
+            return BadRequest();
+        }
+
+        [HttpPut("complete/{id}")]
+        public IActionResult Complete(int id, [FromBody] TodoModel todoModel)
+        {
+            if (!todoModel.Completed)
+                return BadRequest();
+            
+            return this.Put(id, todoModel);
+        }
+
+        [HttpPut("complete/all")]
+        public IActionResult CompleteAll()
+        {
+            foreach (var key in _todos.Keys)
+            {
+                _todos[key].Completed = true;
+            }
+            return GetAll();
+        }
+
+        [HttpDelete("clear-completed")]
+        public IActionResult ClearCompleted()
+        {
+            foreach (var key in _todos.Keys)
+            {
+                TodoModel output;
+                if (!_todos.TryRemove(key, out output))
+                    return BadRequest();
+            }
+            return GetAll();
         }
     }
 }

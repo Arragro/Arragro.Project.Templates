@@ -45,7 +45,7 @@ export const todoReducer = handleActions<RootState.TodoState, TodoModel>({
     [TodoActions.Type.COMPLETE_ALL]: (state, action) => {
         return state.map((todo) => ({ ...todo, completed: true }))
     },
-    [TodoActions.Type.CLEAR_COMPLETED]: (state, action) => {
+    [TodoActions.Type.CLEAR_COMPLETED_SUCCESS]: (state, action) => {
         return state.filter((todo) => todo.completed === false)
     }
 }, initialState)

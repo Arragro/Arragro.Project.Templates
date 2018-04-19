@@ -23,7 +23,7 @@ export namespace Todos {
         todoState: RootState.TodoState
         actions: TodoActions
         filter: TodoModel.Filter
-        service: TodoService.TodoServiceConnectedDispatch
+        serviceActions: TodoService.TodoServiceConnectedDispatch
     }
 }
 
@@ -39,7 +39,7 @@ export class Todos extends React.Component<Todos.Props> {
     }
 
     componentWillMount () {
-        this.props.service.getAll()
+        this.props.serviceActions.getAll()
     }
 
     handleClearCompleted (): void {
@@ -85,9 +85,9 @@ const mapStateToProps = (state: RootState): Pick<Todos.Props, 'todoState' | 'fil
     return props
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<RootState>): Pick<Todos.Props, 'actions' | 'service'> => ({
+const mapDispatchToProps = (dispatch: Dispatch<RootState>): Pick<Todos.Props, 'actions' | 'serviceActions'> => ({
     actions: bindActionCreators(omit(TodoActions, 'Type'), dispatch),
-    service: TodoService.dispatchServices(dispatch)
+    serviceActions: TodoService.dispatchServices(dispatch)
 })
 
 const connectedTodos = connect(mapStateToProps, mapDispatchToProps)(Todos)

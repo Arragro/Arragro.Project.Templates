@@ -6,6 +6,9 @@ import { History } from 'history'
 import { loggerMiddleware } from 'redux/middleware'
 import { RootState, rootReducer } from 'redux/reducers'
 
+// Hot Module Replacement API
+declare let module: { hot: any }
+
 export function configureStore (history: History, logging: boolean = false, initialState?: RootState): Store<RootState> {
     let middleware = applyMiddleware(thunk, loggerMiddleware(logging), routerMiddleware(history))
 

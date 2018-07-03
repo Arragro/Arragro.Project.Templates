@@ -7,9 +7,9 @@ export const todoApiMiddleware = (): Middleware =>
             (action: any): any => {
                 debugger
                 switch (action.type) {
-                case TodoActions.Type.CLEAR_COMPLETED_START:
+                case TodoActions.Type.CLEAR_COMPLETED:
                     Promise.resolve(console.log('!!! CLEAR START !!!'))
-                        .then(() => dispatch(TodoActions.clearCompletedSuccess()))
+                        .then(() => dispatch(TodoActions.clearCompleted()))
                     break
                 default:
                     return next(action)

@@ -1,15 +1,17 @@
 const path = require('path');
+const glob = require('glob-all');
 const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
+const PurifyCSSPlugin = require('purifycss-webpack');
 
 module.exports = (env) => {
-
-    const isDevBuild = !(env && env === 'prod');
+    const devMode = env === null || env['run-prod'] === undefined || env['run-prod'] === null || env['run-prod'] === false;
 
     let config = {
+        mode: devMode ? 'development' : 'production',
         devtool: 'source-map',
         resolve: {
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -18,7 +20,7 @@ module.exports = (env) => {
             ]
         },
         module: {
-            loaders: [
+            rules: [
                 {
                     test: /\.ts(x?)$/,
                     include: /ReactApp/,
@@ -26,26 +28,32 @@ module.exports = (env) => {
                         /node_modules/,
                         /obj/
                     ],
-                    use: [
-                        { loader: 'babel-loader' },
-                        { loader: 'awesome-typescript-loader' }
-                    ]
-                },
-                { 
-                    test: /\.scss?/, 
-                    exclude: /node_modules/, 
-                    use: [
-                        'css-hot-loader'                        
-                    ].concat(ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'postcss-loader', 'sass-loader']}))
+                    loader: 'awesome-typescript-loader',
+                    query: {
+                        useBabel: true,
+                        useCache: devMode
+                    }
                 },
                 {
-                  test: /\.css$/,
-                  use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
+                    test: /\.(sa|sc|c)ss$/,
                     use: [
-                      { loader: 'css-loader' }
-                    ]
-                  })
+                        'css-hot-loader',
+                        MiniCssExtractPlugin.loader,
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 2,
+                                sourceMap: true
+                            }
+                        },
+                        'postcss-loader',
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        }
+                    ],
                 },
                 { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
                 { test: /\.woff(\?\S*)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
@@ -53,36 +61,64 @@ module.exports = (env) => {
             ]
         },
         entry: {
-            main: ['react-hot-loader/patch', './ReactApp/index.tsx'],
-            vendor: ['react', 'react-dom']
+            main: ['react-hot-loader/patch', './ReactApp/index.tsx']
         },
         output: {
             path: path.join(__dirname, 'wwwroot', 'dist'),
             filename: '[name].js',
+            chunkFilename: '[name].js',
             publicPath: '/dist/'
         },
+        optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    styles: {
+                        name: 'styles',
+                        test: /\.css$/,
+                        chunks: 'all',
+                        enforce: true
+                    },
+                    commons: {
+                        test: /[\\/]node_modules[\\/]/,
+                        name: "vendor",
+                        chunks: "all"
+                    }
+                }
+            }
+        },
         plugins: [
-            new ExtractTextPlugin('main.css'),
-            require('autoprefixer'),
-            new webpack.optimize.OccurrenceOrderPlugin(),
+            new MiniCssExtractPlugin({
+                filename: "main.css",
+                chunkFilename: "vendor.css"
+            }),
+            new PurifyCSSPlugin({
+                // Give paths to parse for rules. These should be absolute!
+                paths: glob.sync([
+                    path.join(__dirname, './**/*.cshtml'),
+                    path.join(__dirname, './**/*.tsx')
+                ]),
+                purifyOptions: {
+                    info: true, 
+                    minify: true,
+                    whitelist: [
+                        'dropdown-menu'
+                    ]
+                }
+            }),
+            require('autoprefixer')
         ].concat(
-            isDevBuild ? [
+            devMode ? [
             ] : [
-                    new webpack.DefinePlugin({
-                        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-                    }),
-                    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.js' }),
-                    new webpack.optimize.UglifyJsPlugin(),
-                    new webpack.optimize.AggressiveMergingPlugin(),
-                    new CompressionPlugin({
-                        asset: "[path].gz[query]",
-                        algorithm: "gzip",
-                        test: /\.js$|\.css$|\.svg$/,
-                        threshold: 10240,
-                        minRatio: 0.8
-                    }),
-                ])
-    }
+                new CompressionPlugin({
+                    asset: "[path].gz[query]",
+                    //include: /\/wwwroot/,
+                    algorithm: "gzip",
+                    test: /\.js$|\.css$|\.svg$/,
+                    threshold: 10240,
+                    minRatio: 0.8
+                })
+            ])
+    };
 
-    return config
+    return config;
 };

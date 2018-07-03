@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions'
 import { RootState } from 'redux/state'
 import { TodoActions } from './actions'
+import { TodoService } from './serviceActions'
 import { TodoModel } from '@models/index'
 
 const initialState: RootState.TodoState = {
@@ -9,7 +10,7 @@ const initialState: RootState.TodoState = {
 }
 
 export const TodoReducer = handleActions<RootState.TodoState, TodoModel & TodoModel[]>({
-    [TodoActions.Type.GET_ALL_TODOS_SUCCESS]: (state, action) => {
+    [TodoService.Type.GET_ALL_TODOS_SUCCESS]: (state, action) => {
         if (action.payload !== undefined) {
             return {
                 isLoading: false,
@@ -71,7 +72,7 @@ export const TodoReducer = handleActions<RootState.TodoState, TodoModel & TodoMo
             todoModels
         }
     },
-    [TodoActions.Type.CLEAR_COMPLETED_SUCCESS]: (state, action) => {
+    [TodoActions.Type.CLEAR_COMPLETED]: (state, action) => {
         debugger
         const todoModels = state.todoModels.filter((todo) => todo.completed === false)
         return {

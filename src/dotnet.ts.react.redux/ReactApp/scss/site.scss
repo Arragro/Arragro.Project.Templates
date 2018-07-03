@@ -162,5 +162,13 @@ a.btn:focus {
     background-color: rgba(169, 68, 66, 0.40)
 }
 
+.test-purify {
+    display: none;
+}
+
+.test-excluded {
+    display: none;
+}
+
 @import 'navbar.scss';
 @import 'todo.scss';

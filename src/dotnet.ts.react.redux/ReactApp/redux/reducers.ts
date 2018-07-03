@@ -6,6 +6,6 @@ import { routerReducer, RouterState } from 'react-router-redux'
 export { RootState, RouterState }
 
 export const rootReducer: Reducer<RootState> = combineReducers<RootState>({
-    todoState: TodoReducer,
-    router: routerReducer
+    todoState: TodoReducer
+    // router: routerReducer
 })

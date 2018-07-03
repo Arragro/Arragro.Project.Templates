@@ -44,9 +44,9 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "react-s-alert": "^1.4.1",
     "reactstrap": "^6.2.0",
-    "redux": "^3.7.2",
+    "redux": "^4.0.0",
     "redux-actions": "^2.4.0",
-    "redux-thunk": "2.2.0"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.4",
@@ -55,7 +55,7 @@
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
     "@types/react-hot-loader": "^4.1.0",
-    "@types/react-redux": "5.0.15",
+    "@types/react-redux": "^6.0.3",
     "@types/react-router": "^4.0.28",
     "@types/react-router-dom": "^4.2.7",
     "@types/react-router-redux": "^5.0.15",

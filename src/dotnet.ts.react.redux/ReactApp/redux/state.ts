@@ -2,6 +2,7 @@ import { TodoModel } from '@models/index'
 import { RouterState } from 'react-router-redux'
 
 export interface RootState {
+    type: string
     todoState: RootState.TodoState
     router: RouterState
 }

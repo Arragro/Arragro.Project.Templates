@@ -9,14 +9,14 @@ import { RootState, rootReducer } from 'redux/reducers'
 // Hot Module Replacement API
 declare let module: { hot: any }
 
-export function configureStore (history: History, logging: boolean = false, initialState?: RootState): Store<RootState> {
+export function configureStore (history: History, logging: boolean = false, initialState: RootState): Store<RootState> {
     let middleware = applyMiddleware(thunk, loggerMiddleware(logging), routerMiddleware(history))
 
     if (process.env.NODE_ENV !== 'production') {
         middleware = composeWithDevTools(middleware)
     }
 
-    const store = createStore(rootReducer as any, initialState, middleware) as Store<RootState>
+    const store = createStore(rootReducer, initialState, middleware) as Store<RootState>
 
     if (module.hot) {
         module.hot.accept('redux/reducers', () => {

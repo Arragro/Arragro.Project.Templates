@@ -13,7 +13,7 @@ export namespace TodoService {
     const getAllAction = createAction(Type.GET_ALL_TODOS_START)
     const getAllSuccessAction = createAction(Type.GET_ALL_TODOS_SUCCESS, (todos: Array<TodoModel>) => todos)
 
-    export const getAll = () => {
+    export const getAll = (): any => {
         return function (dispatch: (action: any) => void) {
             dispatch(getAllAction())
 

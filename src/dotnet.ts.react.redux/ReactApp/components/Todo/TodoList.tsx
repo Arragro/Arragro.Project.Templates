@@ -5,7 +5,7 @@ import { TodoModel } from '@models/index'
 
 export namespace TodoList {
     export interface Props {
-        todos: TodoModel[]
+        todos: ReadonlyArray<TodoModel>
         actions: TodoActions
     }
 }

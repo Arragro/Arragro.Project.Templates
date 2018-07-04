@@ -1,6 +1,5 @@
 // import { addTask } from 'domain-task'
-import { createAction } from 'redux-actions'
-import { TodoModel } from 'models'
+import { action } from 'typesafe-actions'
 
 export namespace TodoActions {
     export enum Type {
@@ -12,12 +11,12 @@ export namespace TodoActions {
         CLEAR_COMPLETED = 'CLEAR_COMPLETED'
     }
 
-    export const addTodo = createAction<PartialPick<TodoModel, 'text'>>(Type.ADD_TODO)
-    export const editTodo = createAction<Partial<TodoModel>>(Type.EDIT_TODO)
-    export const deleteTodo = createAction<TodoModel['id']>(Type.DELETE_TODO)
-    export const completeTodo = createAction<TodoModel['id']>(Type.COMPLETE_TODO)
-    export const completeAll = createAction(Type.COMPLETE_ALL)
-    export const clearCompleted = createAction(Type.CLEAR_COMPLETED)
+    export const addTodo = (text: string) => action(Type.ADD_TODO, text)
+    export const editTodo = (id: number, text: string) => action(Type.EDIT_TODO, { id, text })
+    export const deleteTodo = (id: number) => action(Type.DELETE_TODO, id)
+    export const completeTodo = (id: number) => action(Type.COMPLETE_TODO, id)
+    export const completeAll = () => action(Type.COMPLETE_ALL)
+    export const clearCompleted = () => action(Type.CLEAR_COMPLETED)
 }
 
 export type TodoActions = Omit<typeof TodoActions, 'Type'>

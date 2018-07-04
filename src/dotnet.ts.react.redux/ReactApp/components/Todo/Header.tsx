@@ -16,7 +16,7 @@ export class Header extends React.Component<Header.Props> {
 
     handleSave (text: string) {
         if (text.length) {
-            this.props.addTodo({ text })
+            this.props.addTodo(text)
         }
     }
 

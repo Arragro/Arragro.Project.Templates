@@ -7,6 +7,7 @@ import { RootState } from '@redux/reducers'
 import { TodoModel } from '@models/index'
 import { omit } from '@utils/index'
 import { Header, TodoList, Footer } from '@components/index'
+import { TodoState } from '@redux/state'
 
 const FILTER_VALUES = (Object.keys(TodoModel.Filter) as (keyof typeof TodoModel.Filter)[]).map(
   (key) => TodoModel.Filter[key]
@@ -20,7 +21,7 @@ const FILTER_FUNCTIONS: Record<TodoModel.Filter, (todo: TodoModel) => boolean> =
 
 export namespace Todos {
     export interface Props extends RouteComponentProps<void> {
-        todoState: RootState.TodoState
+        todoState: TodoState
         actions: TodoActions
         filter: TodoModel.Filter
         serviceActions: TodoService.TodoServiceConnectedDispatch

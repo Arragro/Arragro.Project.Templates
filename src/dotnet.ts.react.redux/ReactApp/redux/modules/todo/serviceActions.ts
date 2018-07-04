@@ -1,6 +1,5 @@
+import { action } from 'typesafe-actions'
 import { Dispatch } from 'redux'
-import { createAction } from 'redux-actions'
-import { RootState } from '@redux/state'
 import { TodoModel } from '@models/index'
 import HttpUtils from '@utils/httpUtils'
 
@@ -10,8 +9,8 @@ export namespace TodoService {
         GET_ALL_TODOS_SUCCESS = 'GET_ALL_TODOS_SUCCESS'
     }
 
-    const getAllAction = createAction(Type.GET_ALL_TODOS_START)
-    const getAllSuccessAction = createAction(Type.GET_ALL_TODOS_SUCCESS, (todos: Array<TodoModel>) => todos)
+    const getAllAction = () => action(Type.GET_ALL_TODOS_START)
+    const getAllSuccessAction = (todos: Array<TodoModel>) => action(Type.GET_ALL_TODOS_SUCCESS, todos)
 
     export const getAll = (): any => {
         return function (dispatch: (action: any) => void) {
@@ -34,7 +33,7 @@ export namespace TodoService {
         getAll (): void
     }
 
-    export const dispatchServices = (dispatch: Dispatch<RootState>): TodoServiceConnectedDispatch => {
+    export const dispatchServices = (dispatch: Dispatch): TodoServiceConnectedDispatch => {
         return {
             getAll: () => dispatch(TodoService.getAll())
         }

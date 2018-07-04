@@ -1,16 +1,15 @@
-import { handleActions } from 'redux-actions'
-import { RootState } from 'redux/state'
-import { TodoActions } from './actions'
+import { TodoState } from 'redux/state'
+import { TodoActions as actions } from './actions'
 import { TodoService } from './serviceActions'
-import { TodoModel } from '@models/index'
 
-const initialState: RootState.TodoState = {
+const initialState: TodoState = {
     isLoading: false,
     todoModels: []
 }
 
-export const TodoReducer = handleActions<RootState.TodoState, TodoModel & TodoModel[]>({
-    [TodoService.Type.GET_ALL_TODOS_SUCCESS]: (state, action) => {
+export const TodoReducer = (state = initialState, action: any) => {
+    switch (action.type) {
+    case TodoService.Type.GET_ALL_TODOS_SUCCESS:
         if (action.payload !== undefined) {
             return {
                 isLoading: false,
@@ -22,28 +21,26 @@ export const TodoReducer = handleActions<RootState.TodoState, TodoModel & TodoMo
                 todoModels: []
             }
         }
-    },
-    [TodoActions.Type.ADD_TODO]: (state, action) => {
-        if (action.payload && action.payload.text) {
+    case actions.Type.ADD_TODO:
+        debugger
+        if (action.payload && action.payload) {
             return {
                 ...state,
                 todoModels: state.todoModels.concat({
                     id: state.todoModels.reduce((max, todo) => Math.max(todo.id || 1, max), 0) + 1,
                     completed: false,
-                    text: action.payload.text
+                    text: action.payload
                 })
             }
         } else {
             return state
         }
-    },
-    [TodoActions.Type.DELETE_TODO]: (state, action) => {
+    case actions.Type.DELETE_TODO:
         return {
             ...state,
             todoModels: state.todoModels.filter((todo) => todo.id !== (action.payload as any))
         }
-    },
-    [TodoActions.Type.EDIT_TODO]: (state, action) => {
+    case actions.Type.EDIT_TODO:
         return {
             ...state,
             todoModels: state.todoModels.map((todo) => {
@@ -56,23 +53,21 @@ export const TodoReducer = handleActions<RootState.TodoState, TodoModel & TodoMo
                 }
             })
         }
-    },
-    [TodoActions.Type.COMPLETE_TODO]: (state, action) => {
+    case actions.Type.COMPLETE_TODO:
         return {
             ...state,
             todoModels: state.todoModels.map(
                 (todo) => (todo.id === (action.payload as any) ? { ...todo, completed: !todo.completed } : todo)
             )
         }
-    },
-    [TodoActions.Type.COMPLETE_ALL]: (state, action) => {
+    case actions.Type.COMPLETE_ALL: {
         const todoModels = state.todoModels.map((todo) => ({ ...todo, completed: true }))
         return {
             ...state,
             todoModels
         }
-    },
-    [TodoActions.Type.CLEAR_COMPLETED]: (state, action) => {
+    }
+    case actions.Type.CLEAR_COMPLETED: {
         debugger
         const todoModels = state.todoModels.filter((todo) => todo.completed === false)
         return {
@@ -80,4 +75,7 @@ export const TodoReducer = handleActions<RootState.TodoState, TodoModel & TodoMo
             todoModels
         }
     }
-}, initialState)
+    default:
+        return state
+    }
+}

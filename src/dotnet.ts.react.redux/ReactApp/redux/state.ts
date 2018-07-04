@@ -1,15 +1,12 @@
 import { TodoModel } from '@models/index'
 import { RouterState } from 'react-router-redux'
 
-export interface RootState {
-    type: string
-    todoState: RootState.TodoState
+export type RootState = Readonly<{
+    todoState: TodoState
     router: RouterState
-}
+}>
 
-export namespace RootState {
-    export type TodoState = {
-        isLoading: boolean
-        todoModels: TodoModel[]
-    }
+export type TodoState = {
+    isLoading: Readonly<boolean>
+    todoModels: ReadonlyArray<TodoModel>
 }

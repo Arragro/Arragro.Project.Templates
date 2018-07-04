@@ -31,7 +31,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
         if (text.length === 0) {
             this.props.deleteTodo(id)
         } else {
-            this.props.editTodo({ id, text })
+            this.props.editTodo(id, text)
         }
         this.setState({ editing: false })
     }

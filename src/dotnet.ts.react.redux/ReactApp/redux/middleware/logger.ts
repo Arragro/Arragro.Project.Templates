@@ -1,8 +1,8 @@
 import { Middleware, MiddlewareAPI, Dispatch } from 'redux'
 
 export const loggerMiddleware = (enabled: boolean = false): Middleware =>
-    <S>({ getState }: MiddlewareAPI<S>) =>
-        (next: Dispatch<S>) =>
+    ({ getState }: MiddlewareAPI) =>
+        (next: Dispatch) =>
             (action: any): any => {
                 if (enabled) {
                     console.log('will dispatch', action)

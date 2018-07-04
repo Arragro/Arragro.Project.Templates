@@ -85,7 +85,7 @@ const mapStateToProps = (state: RootState): Pick<Todos.Props, 'todoState' | 'fil
     return props
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<RootState>): Pick<Todos.Props, 'actions' | 'serviceActions'> => ({
+const mapDispatchToProps = (dispatch: Dispatch): Pick<Todos.Props, 'actions' | 'serviceActions'> => ({
     actions: bindActionCreators(omit(TodoActions, 'Type'), dispatch),
     serviceActions: TodoService.dispatchServices(dispatch)
 })

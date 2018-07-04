@@ -1,9 +1,9 @@
 import { Middleware, MiddlewareAPI, Dispatch } from 'redux'
 import { TodoActions } from '../modules/todo/actions'
 
-export const todoApiMiddleware = (): Middleware =>
-    <S>({ dispatch }: MiddlewareAPI<S>) =>
-        (next: Dispatch<S>) =>
+export const todoApiMiddleware: Middleware =
+    ({ dispatch }: MiddlewareAPI) =>
+        (next: Dispatch) =>
             (action: any): any => {
                 debugger
                 switch (action.type) {
